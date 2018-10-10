@@ -50,6 +50,30 @@ The app starts in development mode and opens a browser window on `http://localho
 
 The app depends on GitHub authentication and a user creation endpoint that is hosted at https://chatkit-demo-server.herokuapp.com. The endpoints are `/auth` and `/token`.
 
+
+## Build for Production / Distribution
+
+The app implements Github login using OAuth web procedure, which includes a redirect_url. This works in development mode as we have
+a localhost: 3000 or something similar to provide a redirect towards. But in disctribution build, index.html is the homepage, and
+by the app's existing logic the redirect will point towrads `file:// ....... /index.html` which is not allows in oAuth implementations.
+
+Hence, to run the app in a demo mode, a user's Git credentials can be hard coded in the app, and the app runs fine with it. Along with
+this, the steps to create a distribution build is 
+
+To build the code in a separate folder
+```
+yarn build
+```
+
+To create distribution files (exe, dmg etc)
+```
+yarn dist
+```
+
+Necesary changes are already done in `package.json`
+
+Follow this link for creating production build : https://medium.com/@kitze/%EF%B8%8F-from-react-to-an-electron-app-ready-for-production-a0468ecb1da3
+
 [github-star-badge]: https://img.shields.io/github/stars/pusher/react-slack-clone.svg?style=social
 [github-star]: https://github.com/pusher/react-slack-clone/stargazers
 [twitter-badge]: https://img.shields.io/twitter/url/https/github.com/kentcdodds/react-testing-library.svg?style=social
