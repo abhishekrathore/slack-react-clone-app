@@ -196,20 +196,23 @@ class View extends React.Component {
   }
 
   componentDidMount() {
+    const existingUser = {"id":"abhishekrathore","token":"be812e2d30fd74308c0344e406da525a13b76e28","version":"2.1.0"}
+
     'Notification' in window && Notification.requestPermission()
-    existingUser
-      ? ChatManager(this, JSON.parse(existingUser))
-      : fetch('https://chatkit-demo-server.herokuapp.com/auth', {
-          method: 'POST',
-          body: JSON.stringify({ code: authCode }),
-        })
-          .then(res => res.json())
-          .then(user => {
-            user.version = version
-            window.localStorage.setItem('chatkit-user', JSON.stringify(user))
-            window.history.replaceState(null, null, window.location.pathname)
-            ChatManager(this, user)
-          })
+    console.log(authCode)
+    // existingUser
+       ChatManager(this, existingUser)
+      // : fetch('https://chatkit-demo-server.herokuapp.com/auth', {
+      //     method: 'POST',
+      //     body: JSON.stringify({ code: authCode }),
+      //   })
+      //     .then(res => res.json())
+      //     .then(user => {
+      //       user.version = version
+      //       window.localStorage.setItem('chatkit-user', JSON.stringify(user))
+      //       window.history.replaceState(null, null, window.location.pathname)
+      //       ChatManager(this, user)
+      //     })
   }
 
   render() {
@@ -280,16 +283,20 @@ window.localStorage.getItem('chatkit-user') &&
 
 const params = new URLSearchParams(window.location.search.slice(1))
 const authCode = params.get('code')
-const existingUser = window.localStorage.getItem('chatkit-user')
+console.log(authCode)
+// const existingUser = window.localStorage.getItem('chatkit-user');
 
 const githubAuthRedirect = () => {
   const client = '20cdd317000f92af12fe'
   const url = 'https://github.com/login/oauth/authorize'
   const server = 'https://chatkit-demo-server.herokuapp.com'
   const redirect = `${server}/success?url=${window.location.href.split('?')[0]}`
-  window.location = `${url}?scope=user:email&client_id=${client}&redirect_uri=${redirect}`
+  window.alert( `${url}?scope=user:email&client_id=${client}&redirect_uri=${redirect}`)
+  window.location = `${url}?scope=user:email&client_id=${client}&redirect_uri=${redirect}`;
+
 }
 
-!existingUser && !authCode
-  ? githubAuthRedirect()
-  : ReactDOM.render(<View />, document.querySelector('#root'))
+// !existingUser && !authCode
+//   ? existingUser = 
+//   : 
+  ReactDOM.render(<View />, document.querySelector('#root'))

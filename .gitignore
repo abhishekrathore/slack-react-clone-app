@@ -3,3 +3,4 @@ build
 client/static/index.js
 .DS_Store
 .idea/
+dist

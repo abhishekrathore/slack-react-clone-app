@@ -1,9 +1,12 @@
 {
   "name": "chatkit-demo",
   "version": "2.1.0",
-  "homepage": "https://pusher.github.io/react-slack-clone",
+  "author": "abhishek",
+  "description": "react electron chat app",
+  "homepage": "./",
   "dependencies": {
     "@pusher/chatkit": "0.7.17",
+    "electron-is-dev": "^1.0.1",
     "object-path-immutable": "^1.0.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
@@ -15,9 +18,21 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
   },
-  "main": "main.js",
+  "build": {
+    "appId": "com.electron.reactselect",
+    "files": [
+      "build/**/*",
+      "node_modules/**/*"
+    ],
+    "directories": {
+      "buildResources": "assets"
+    }
+  },
+  "main": "build/electron.js",
   "browserslist": {
     "development": [
       "last 2 chrome versions",
@@ -30,5 +45,8 @@
       "Firefox ESR",
       "not ie < 11"
     ]
+  },
+  "devDependencies": {
+    "electron-builder": "^20.28.4"
   }
 }

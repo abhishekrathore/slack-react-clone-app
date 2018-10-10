@@ -1,5 +1,7 @@
 const {app, BrowserWindow} = require('electron')
-
+const path = require('path');
+const url = require('url');
+const isDev = require('electron-is-dev');
 let win = null;
 
 function createWindow() {
@@ -7,8 +9,10 @@ function createWindow() {
   win = new BrowserWindow({width: 1000, height: 600});
 
   // Specify entry point
-  win.loadURL('http://localhost:3000');
+  win.loadURL(`file://${path.join(__dirname, '../build/index.html')}`);
 
+  console.log('running electron.js')
+  console.log(`file://${path.join(__dirname, '../build/index.html')}`)
   // Show dev tools
   // Remove this line before distributing
   win.webContents.openDevTools()
